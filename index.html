@@ -1,0 +1,125 @@
+<?php
+// index.php (actualizado con enlaces a las versiones con mapa)
+session_start();
+include 'includes/funciones.php';
+
+$mensaje = '';
+$tipo_mensaje = '';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $pasajero = $_POST['pasajero'] ?? '';
+    $origen = $_POST['origen'] ?? '';
+    $destino = $_POST['destino'] ?? '';
+    
+    $mensaje = solicitarViaje($pasajero, $origen, $destino);
+    
+    if (strpos($mensaje, '✓') === 0) {
+        $tipo_mensaje = 'exito';
+    } else {
+        $tipo_mensaje = 'error';
+    }
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mi Uber - Sistema Educativo</title>
+    <style>
+        body { font-family: Arial; margin: 40px; background-color: #f5f5f5; }
+        .container { max-width: 800px; margin: auto; }
+        .card { background: white; border-radius: 10px; padding: 20px; margin-bottom: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { color: #333; text-align: center; }
+        .version-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        .version-btn {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 18px;
+            transition: transform 0.3s;
+        }
+        .version-btn:hover {
+            transform: scale(1.05);
+            background: #0056b3;
+        }
+        .version-btn.mapa {
+            background: #28a745;
+        }
+        .version-btn.mapa:hover {
+            background: #218838;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .feature {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        .feature h3 {
+            color: #007bff;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>🚖 Sistema Uber Educativo</h1>
+            <p style="text-align: center; font-size: 18px;">Aprendiendo a programar paso a paso</p>
+            
+            <div class="version-buttons">
+                <a href="index.php" class="version-btn">📝 Versión Básica</a>
+                <a href="index_mapa.php" class="version-btn mapa">🗺️ Versión con Mapas</a>
+            </div>
+            
+            <div style="text-align: center; margin: 20px 0;">
+                <a href="viajes.php">📋 Ver historial básico</a> | 
+                <a href="viajes_mapa.php">🗺️ Ver historial con mapas</a>
+            </div>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <h3>📝 Fase 1</h3>
+                <p>Lógica en consola con arrays</p>
+            </div>
+            <div class="feature">
+                <h3>💾 Fase 2</h3>
+                <p>Formularios y sesiones</p>
+            </div>
+            <div class="feature">
+                <h3>🗄️ Fase 3</h3>
+                <p>Base de datos MySQL</p>
+            </div>
+            <div class="feature">
+                <h3>🗺️ Fase 4</h3>
+                <p>Mapas y geolocalización</p>
+            </div>
+            <div class="feature">
+                <h3>📊 Fase 5</h3>
+                <p>Cálculo de tarifas</p>
+            </div>
+            <div class="feature">
+                <h3>👥 Fase 6</h3>
+                <p>Login de usuarios</p>
+            </div>
+        </div>
+        
+        
